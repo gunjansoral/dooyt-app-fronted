@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import Onboarding from './screens/Onboarding';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
@@ -49,10 +50,13 @@ export default function App() {
   }
 
   return (
-    <View
-      style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-      onLayout={onLayoutRootView}>
-      <Onboarding />
-    </View>
+    <ThemeProvider>
+
+      <View
+        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+        onLayout={onLayoutRootView}>
+        <Onboarding />
+      </View>
+    </ThemeProvider>
   );
 }

@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { StyleSheet, TouchableOpacity, View, Animated } from "react-native";
 import Svg, { G, Circle } from "react-native-svg";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ThemeContext } from "../context/ThemeContext";
 
 const NextButton = ({ percentage, onPressNext }) => {
   const size = 128;
@@ -13,6 +14,7 @@ const NextButton = ({ percentage, onPressNext }) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   const [strokeDashoffset, setStrokeDashoffset] = useState(circumference);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     Animated.timing(animatedValue, {
@@ -53,7 +55,7 @@ const NextButton = ({ percentage, onPressNext }) => {
           />
           <AnimatedCircle
             fill="none"
-            stroke="#F4338F"
+            stroke={theme.colors.primary}
             cx={center}
             cy={center}
             r={radius}
@@ -63,7 +65,11 @@ const NextButton = ({ percentage, onPressNext }) => {
           />
         </G>
       </Svg>
-      <TouchableOpacity style={styles.button} activeOpacity={0.6} onPress={handleNextPress}>
+      <TouchableOpacity
+        style={styles.button(theme)} // Pass the theme to the button style function
+        activeOpacity={0.6}
+        onPress={handleNextPress}
+      >
         <Icon name="arrow-right" size={32} strokeWidth={1} color="#fff" />
       </TouchableOpacity>
     </View>
@@ -78,12 +84,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  button: {
+  button: (theme) => ({ // Define a function that takes the theme as a parameter
     position: "absolute",
-    backgroundColor: "#f4338f",
+    backgroundColor: theme.colors.primary, // Access the theme directly
     borderRadius: 180,
     padding: 20,
-  },
+  }),
 });
 
 export default NextButton;

@@ -1,14 +1,17 @@
+import { useContext } from "react";
 import { StyleSheet, Text, View, Image, useWindowDimensions } from "react-native";
+import { ThemeContext } from "../context/ThemeContext";
 
 const OnboardingItem = ({ item }) => {
   const { width } = useWindowDimensions();
+  const { theme } = useContext(ThemeContext)
 
   return (
     <View style={[styles.container, { width }]}>
       <Image source={item.image} style={[styles.image, { width, resizeMode: 'contain' }]} />
       <View style={{ flex: 0.3 }} >
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.description}>{item.description}</Text>
+        <Text style={styles.title(theme)}>{item.title}</Text>
+        <Text style={styles.description(theme)}>{item.description}</Text>
       </View>
     </View>
   );
@@ -24,19 +27,19 @@ const styles = StyleSheet.create({
     flex: 0.7,
     justifyContent: 'center'
   },
-  title: {
+  title: (theme) => ({
     fontWeight: '800',
     fontSize: 28,
     marginBottom: 10,
-    color: '#493d8a',
+    color: theme.colors.textPrimary,
     textAlign: 'center'
-  },
-  description: {
+  }),
+  description: (theme) => ({
     fontWeight: '300',
     paddingHorizontal: 64,
-    color: '#62656b',
+    color: theme.colors.textSecondary,
     textAlign: 'center'
-  }
+  })
 })
 
 export default OnboardingItem;
