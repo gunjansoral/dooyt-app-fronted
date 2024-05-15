@@ -12,7 +12,7 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/fonts/**/*"
     ],
     "ios": {
       "supportsTablet": true
@@ -30,7 +30,12 @@
       [
         "expo-font",
         {
-          "fonts": ["./assets/fonts/Lato/Lato-Black.ttf"]
+          "fonts": [
+            "./assets/fonts/Lato/Lato-Black.ttf",
+            "./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-ExtraLight.ttf",
+            "./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Light.ttf",
+            "./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf"
+          ]
         }
       ]
     ]

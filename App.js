@@ -1,13 +1,18 @@
+import 'react-native-gesture-handler';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import Onboarding from './screens/Onboarding';
+import EnterSpaceTitle from './screens/login/EnterSpaceTitle';
+import EnterSpaceCode from './screens/login/EnterSpaceCode';
 import { ThemeProvider } from './context/ThemeContext';
 
-// Keep the splash screen visible while we fetch resources
-SplashScreen.preventAutoHideAsync();
-export default function App() {
+const Stack = createStackNavigator();
+
+function App() {
   const [appIsReady, setAppIsReady] = useState(false);
 
   useEffect(() => {
@@ -15,16 +20,11 @@ export default function App() {
       try {
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync({
-          'PlusJakartaSans-Regular': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf'),
-          'PlusJakartaSans-ExtraLight': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-ExtraLight.ttf'),
-          'PlusJakartaSans-Light': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Light.ttf')
-          // Add other font weights as needed
+          // 'PlusJakartaSans-Regular': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf')
+          // More fonts can be loaded here
         });
-        // Artificially delay for two seconds to simulate a slow loading
-        // experience. Please remove this if you copy and paste the code!
-        // await new Promise(resolve => setTimeout(resolve, 2000));
       } catch (e) {
-        console.warn(e);
+        console.warn("Failed to load fonts: ", e);
       } finally {
         // Tell the application to render
         setAppIsReady(true);
@@ -51,12 +51,21 @@ export default function App() {
 
   return (
     <ThemeProvider>
-
-      <View
-        style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
-        onLayout={onLayoutRootView}>
-        <Onboarding />
-      </View>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="EnterSpaceCode"
+          screenOptions={{
+            headerShown: false  // This line hides the header globally for all screens
+          }}
+        >
+          <Stack.Screen name="Onboarding" component={Onboarding} />
+          <Stack.Screen name="EnterSpaceTitle" component={EnterSpaceTitle} />
+          <Stack.Screen name="EnterSpaceCode" component={EnterSpaceCode} />
+          {/* Additional screens can be added here */}
+        </Stack.Navigator>
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
+
+export default App;
