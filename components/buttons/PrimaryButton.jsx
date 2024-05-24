@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const PrimaryButton = ({ style, text, icon, onPress }) => {
   return (
@@ -21,6 +21,8 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 66,
     justifyContent: "center",
+    flexDirection: "row",
+    gap: 6,
     alignItems: "center",
   }),
   text: color => ({

@@ -9,6 +9,7 @@ import Onboarding from './screens/Onboarding';
 import EnterSpaceTitle from './screens/login/EnterSpaceTitle';
 import EnterSpaceCode from './screens/login/EnterSpaceCode';
 import { ThemeProvider } from './context/ThemeContext';
+import SelectCategory from './screens/login/SelectCategory';
 
 const Stack = createStackNavigator();
 
@@ -20,8 +21,9 @@ function App() {
       try {
         // Pre-load fonts, make any API calls you need to do here
         await Font.loadAsync({
-          // 'PlusJakartaSans-Regular': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf')
-          // More fonts can be loaded here
+          'PlusJakartaSans-Regular': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf'),
+          'PlusJakartaSans-Medium': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Medium.ttf'),
+          'PlusJakartaSans-SemiBold': require('./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-SemiBold.ttf'),
         });
       } catch (e) {
         console.warn("Failed to load fonts: ", e);
@@ -53,7 +55,7 @@ function App() {
     <ThemeProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="EnterSpaceCode"
+          initialRouteName="SelectCategory"
           screenOptions={{
             headerShown: false  // This line hides the header globally for all screens
           }}
@@ -61,6 +63,7 @@ function App() {
           <Stack.Screen name="Onboarding" component={Onboarding} />
           <Stack.Screen name="EnterSpaceTitle" component={EnterSpaceTitle} />
           <Stack.Screen name="EnterSpaceCode" component={EnterSpaceCode} />
+          <Stack.Screen name="SelectCategory" component={SelectCategory} />
           {/* Additional screens can be added here */}
         </Stack.Navigator>
       </NavigationContainer>

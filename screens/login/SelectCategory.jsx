@@ -1,11 +1,13 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { ThemeContext } from '../../context/ThemeContext'
 import CustomTextInput from '../../components/inputs/CustomTextInput'
 import PrimaryButton from '../../components/buttons/PrimaryButton'
 import ArrowRightIcon from '../../assets/icons/arrow-right.svg';
+import SelectButton from '../../components/buttons/SelectButton'
+import CategoryList from '../../components/CategoryList'
 
-const EnterSpaceTitle = () => {
+const SelectCategory = () => {
   const { theme } = useContext(ThemeContext);
 
   const handleRegisterNowPress = () => {
@@ -21,36 +23,19 @@ const EnterSpaceTitle = () => {
         </View>
 
         <View style={styles.mid} >
-          <Text style={styles.title(theme)}>Enter Your Space Title</Text>
+          <Text style={styles.title(theme)}>Select Category</Text>
           <Text style={styles.subTitle(theme)}>
-            Enter your information to start using the Dooyt App
+            Select your buisiness category
           </Text>
-          <CustomTextInput placeholder='Your Space Title' />
-
+          <CategoryList />
         </View>
       </View>
 
-
-
-      <View style={styles.bottom}>
-        <PrimaryButton
-          text="Continue"
-          style={styles.bottomButton(theme)}
-          icon={<ArrowRightIcon />}
-        />
-        <Text style={styles.byGivingYourContainer}>
-          <Text style={styles.byGivingYour}>{`By giving your information, you agree to our `}</Text>
-          <Text style={styles.termsConditions}>{`Terms & Conditions`}</Text>
-          <Text style={styles.byGivingYour}>{` and `}</Text>
-          <Text style={styles.termsConditions}>Privacy Policy</Text>
-          <Text style={styles.byGivingYour}>.</Text>
-        </Text>
-      </View>
     </SafeAreaView>
   )
 }
 
-export default EnterSpaceTitle
+export default SelectCategory
 
 const styles = StyleSheet.create({
   container: {
@@ -87,32 +72,5 @@ const styles = StyleSheet.create({
   linkText: {
     color: 'blue',
     textDecorationLine: 'underline'
-  },
-  bottom: {
-    gap: 24
-  },
-  bottomButton: theme => ({
-    borderRadius: 33,
-    backgroundColor: "#c8c8c8",
-    flex: 1,
-    width: "100%",
-    fontSize: 16,
-    fontWeight: "700",
-    fontFamily: "PlusJakartaSans-Bold",
-    color: "#fff",
-  }),
-  byGivingYour: {
-    color: "#979797"
-  },
-  termsConditions: {
-    color: "#f65f3e"
-  },
-  byGivingYourContainer: {
-    fontSize: 14,
-    fontWeight: "500",
-    fontFamily: "PlusJakartaSans-Medium",
-    textAlign: "center",
-    width: 291,
-    height: 37
   }
 });
