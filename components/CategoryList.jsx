@@ -10,7 +10,7 @@ const CategoryList = () => {
     { id: '2', title: "Spa & Salon", onPress: () => console.log("Spa & Salon tapped") },
     { id: '3', title: "Stores & Groceries", onPress: () => console.log("Stores & Groceries tapped") },
     { id: '4', title: "Health & Medical", onPress: () => console.log("Health & Medical tapped") },
-    { id: '5', title: "Others", onPress: () => console.log("Others tapped") }
+    { id: '5', title: "Others", onPress: () => console.log("Others tapped") },
   ];
 
   return (

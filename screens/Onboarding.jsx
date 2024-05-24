@@ -4,11 +4,13 @@ import OnboardingItem from "../components/OnboardingItem";
 import { useRef, useState } from "react";
 import Paginator from "../components/Paginator";
 import NextButton from "../components/NextButton";
+import { useNavigation } from '@react-navigation/native';
 
 const Onboarding = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollX = useRef(new Animated.Value(0)).current;
   const slidesRef = useRef(null);
+  const navigation = useNavigation();
 
   const viewableItemsChanged = useRef(({ viewableItems }) => {
     setCurrentIndex(viewableItems[0].index);
@@ -19,6 +21,8 @@ const Onboarding = () => {
     if (slidesRef.current && nextIndex < slides.length) {
       slidesRef.current.scrollToIndex({ index: nextIndex });
       setCurrentIndex(nextIndex);
+    } else {
+      navigation.navigate('Register');  // Use navigation here
     }
   };
 

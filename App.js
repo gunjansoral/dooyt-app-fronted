@@ -6,10 +6,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import Onboarding from './screens/Onboarding';
-import EnterSpaceTitle from './screens/login/EnterSpaceTitle';
-import EnterSpaceCode from './screens/login/EnterSpaceCode';
+import EnterSpaceTitle from './screens/profileGeneration/EnterSpaceTitle';
+import EnterSpaceCode from './screens/profileGeneration/EnterSpaceCode';
 import { ThemeProvider } from './context/ThemeContext';
-import SelectCategory from './screens/login/SelectCategory';
+import SelectCategory from './screens/profileGeneration/SelectCategory';
+import Register from './screens/profileGeneration';
 
 const Stack = createStackNavigator();
 
@@ -55,16 +56,13 @@ function App() {
     <ThemeProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="SelectCategory"
+          initialRouteName="Onbaording"
           screenOptions={{
             headerShown: false  // This line hides the header globally for all screens
           }}
         >
           <Stack.Screen name="Onboarding" component={Onboarding} />
-          <Stack.Screen name="EnterSpaceTitle" component={EnterSpaceTitle} />
-          <Stack.Screen name="EnterSpaceCode" component={EnterSpaceCode} />
-          <Stack.Screen name="SelectCategory" component={SelectCategory} />
-          {/* Additional screens can be added here */}
+          <Stack.Screen name="Register" component={Register} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
