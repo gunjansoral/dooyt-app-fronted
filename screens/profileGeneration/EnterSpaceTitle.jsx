@@ -15,29 +15,29 @@ const EnterSpaceTitle = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.top} >
+      <View style={styles.top}>
         <View style={styles.backButton}>
           <Image source={require('../../assets/icons/chevron_big_left.png')} />
         </View>
 
-        <View style={styles.mid} >
+        <View style={styles.mid}>
           <Text style={styles.title(theme)}>Enter Your Space Title</Text>
           <Text style={styles.subTitle(theme)}>
             Enter your information to start using the Dooyt App
           </Text>
           <CustomTextInput placeholder='Your Space Title' />
-
         </View>
       </View>
 
-
-
       <View style={styles.bottom}>
-        <PrimaryButton
-          text="Continue"
-          style={styles.bottomButton(theme)}
-          icon={<ArrowRightIcon />}
-        />
+        <View style={styles.buttonContainer}>
+          <PrimaryButton
+            text="Continue"
+            style={styles.bottomButton(theme)}
+            icon={<ArrowRightIcon />}
+            onPress={() => console.log('pressed')}
+          />
+        </View>
         <Text style={styles.byGivingYourContainer}>
           <Text style={styles.byGivingYour}>{`By giving your information, you agree to our `}</Text>
           <Text style={styles.termsConditions}>{`Terms & Conditions`}</Text>
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     padding: 30,
     marginTop: 14,
     width: '100%',
-    gap: 16,
     justifyContent: 'space-between',
   },
   top: {
@@ -70,7 +69,7 @@ const styles = StyleSheet.create({
   backButton: {
     marginBottom: 20
   },
-  title: (theme) => ({
+  title: theme => ({
     fontSize: 24,
     fontWeight: 'bold',
     color: theme.colors.textPrimary
@@ -89,17 +88,23 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline'
   },
   bottom: {
+    bottom: 20,
     gap: 24
+  },
+  buttonContainer: {
+    // Ensure this container does not stretch the button
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
   },
   bottomButton: theme => ({
     borderRadius: 33,
     backgroundColor: "#c8c8c8",
-    flex: 1,
-    width: "100%",
-    fontSize: 16,
-    fontWeight: "700",
-    fontFamily: "PlusJakartaSans-Bold",
-    color: "#fff",
+    paddingHorizontal: 16,
+    height: 66,
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   }),
   byGivingYour: {
     color: "#979797"
