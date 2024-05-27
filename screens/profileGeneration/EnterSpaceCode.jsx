@@ -1,31 +1,47 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native'
-import React, { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import CustomTextInput from '../../components/inputs/CustomTextInput'
-import PrimaryButton from '../../components/buttons/PrimaryButton'
-import ArrowRightIcon from '../../assets/icons/arrow-right.svg';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { ThemeContext } from '../../context/ThemeContext';
+import CustomTextInput from '../../components/inputs/CustomTextInput';
+import PrimaryButton from '../../components/buttons/PrimaryButton';
+import { ProfileContext } from '../../context/ProfileContext';
+
 
 const EnterSpaceCode = () => {
   const { theme } = useContext(ThemeContext);
+  const { profile, setProfile } = useContext(ProfileContext);
+  const navigation = useNavigation();
+
+  const [spaceCode, setSpaceCode] = useState('');
 
   const handleRegisterNowPress = () => {
-    // Open the link in the browser when the text is pressed
     Linking.openURL('https://www.dooyt.com');
+  };
+
+  const handleContinue = () => {
+    console.log('Space code entered:', spaceCode);
+    setProfile({ ...profile, spaceCode });
+    // Navigate to EnterSpaceTitle screen
+    navigation.navigate('EnterSpaceTitle', { spaceCode });
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.top} >
-        <View style={styles.backButton}>
+      <View style={styles.top}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Image source={require('../../assets/icons/chevron_big_left.png')} />
-        </View>
+        </TouchableOpacity>
 
-        <View style={styles.mid} >
+        <View style={styles.mid}>
           <Text style={styles.title(theme)}>Enter Your Unique Space Code</Text>
           <Text style={styles.subTitle(theme)}>
             Enter your Unique Space Code provided in your subscription plan
           </Text>
-          <CustomTextInput placeholder='Your Space Code' />
+          <CustomTextInput
+            placeholder='Your Space Code'
+            value={spaceCode}
+            onChangeText={setSpaceCode}
+          />
           <TouchableOpacity onPress={handleRegisterNowPress}>
             <Text style={styles.bottomText(theme)}>Do you still not have your own unique space code?
               <Text style={styles.linkText}> Register Now on Dooyt.com</Text>
@@ -34,13 +50,12 @@ const EnterSpaceCode = () => {
         </View>
       </View>
 
-
-
       <View style={styles.bottom}>
         <PrimaryButton
           text="Continue"
           style={styles.bottomButton(theme)}
-          icon={<ArrowRightIcon />}
+          icon={<Image source={require('../../assets/icons/arrow-right.png')} />}
+          onPress={handleContinue}
         />
         <Text style={styles.byGivingYourContainer}>
           <Text style={styles.byGivingYour}>{`By giving your information, you agree to our `}</Text>
@@ -51,10 +66,10 @@ const EnterSpaceCode = () => {
         </Text>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default EnterSpaceCode
+export default EnterSpaceCode;
 
 const styles = StyleSheet.create({
   container: {
@@ -62,61 +77,59 @@ const styles = StyleSheet.create({
     padding: 30,
     marginTop: 14,
     width: '100%',
-    gap: 16,
     justifyContent: 'space-between',
   },
   top: {
-    gap: 10
+    gap: 10,
   },
   mid: {
-    gap: 15
+    gap: 15,
   },
   backButton: {
-    marginBottom: 20
+    marginBottom: 20,
   },
   title: (theme) => ({
     fontSize: 24,
     fontWeight: 'bold',
-    color: theme.colors.textPrimary
+    color: theme.colors.textPrimary,
   }),
-  subTitle: theme => ({
+  subTitle: (theme) => ({
     color: theme.colors.textSecondary,
     fontWeight: '400',
-    fontSize: 16
+    fontSize: 16,
   }),
-  bottomText: theme => ({
+  bottomText: (theme) => ({
     color: theme.colors.textPrimary,
     fontSize: 14,
+    marginTop: 10,
   }),
   linkText: {
     color: 'blue',
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
   },
   bottom: {
-    gap: 24
+    gap: 24,
+    alignItems: 'center',
   },
-  bottomButton: theme => ({
+  bottomButton: (theme) => ({
     borderRadius: 33,
     backgroundColor: "#c8c8c8",
-    flex: 1,
-    width: "100%",
-    fontSize: 16,
-    fontWeight: "700",
-    fontFamily: "PlusJakartaSans-Bold",
-    color: "#fff",
+    paddingHorizontal: 16,
+    height: 66,
+    justifyContent: "center",
+    flexDirection: "row",
+    alignItems: "center",
   }),
   byGivingYour: {
-    color: "#979797"
+    color: '#979797',
   },
   termsConditions: {
-    color: "#f65f3e"
+    color: '#f65f3e',
   },
   byGivingYourContainer: {
     fontSize: 14,
-    fontWeight: "500",
-    fontFamily: "PlusJakartaSans-Medium",
-    textAlign: "center",
-    width: 291,
-    height: 37
-  }
+    fontWeight: '500',
+    fontFamily: 'PlusJakartaSans-Medium',
+    textAlign: 'center',
+  },
 });

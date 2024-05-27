@@ -8,13 +8,13 @@ const Stack = createStackNavigator();
 const Register = () => {
   return (
     <Stack.Navigator
-      initialRouteName="EnterSpaceTitle"
+      initialRouteName="EnterSpaceCode"
       screenOptions={{
         headerShown: false  // This line hides the header globally for all screens
       }}
     >
-      <Stack.Screen name="EnterSpaceTitle" component={EnterSpaceTitle} />
       <Stack.Screen name="EnterSpaceCode" component={EnterSpaceCode} />
+      <Stack.Screen name="EnterSpaceTitle" component={EnterSpaceTitle} />
       <Stack.Screen name="SelectCategory" component={SelectCategory} />
       {/* Additional screens can be added here */}
     </Stack.Navigator>

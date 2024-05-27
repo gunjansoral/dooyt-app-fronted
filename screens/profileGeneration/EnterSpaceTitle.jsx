@@ -1,31 +1,42 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native'
-import React, { useContext } from 'react'
-import { ThemeContext } from '../../context/ThemeContext'
-import CustomTextInput from '../../components/inputs/CustomTextInput'
-import PrimaryButton from '../../components/buttons/PrimaryButton'
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { ThemeContext } from '../../context/ThemeContext';
+import CustomTextInput from '../../components/inputs/CustomTextInput';
+import PrimaryButton from '../../components/buttons/PrimaryButton';
 import ArrowRightIcon from '../../assets/icons/arrow-right.svg';
+import { ProfileContext } from '../../context/ProfileContext';
 
 const EnterSpaceTitle = () => {
   const { theme } = useContext(ThemeContext);
+  const { profile, setProfile } = useContext(ProfileContext);
+  const navigation = useNavigation();
 
-  const handleRegisterNowPress = () => {
-    // Open the link in the browser when the text is pressed
-    Linking.openURL('https://www.dooyt.com');
+  const [spaceTitle, setSpaceTitle] = useState('');
+
+  const handleContinue = () => {
+    setProfile({ ...profile, spaceTitle });
+    console.log('Space title saved:', spaceTitle);
+    navigation.navigate('SelectCategory');
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
-        <View style={styles.backButton}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Image source={require('../../assets/icons/chevron_big_left.png')} />
-        </View>
+        </TouchableOpacity>
 
         <View style={styles.mid}>
           <Text style={styles.title(theme)}>Enter Your Space Title</Text>
           <Text style={styles.subTitle(theme)}>
             Enter your information to start using the Dooyt App
           </Text>
-          <CustomTextInput placeholder='Your Space Title' />
+          <CustomTextInput
+            placeholder='Your Space Title'
+            value={spaceTitle}
+            onChangeText={setSpaceTitle}
+          />
         </View>
       </View>
 
@@ -34,8 +45,8 @@ const EnterSpaceTitle = () => {
           <PrimaryButton
             text="Continue"
             style={styles.bottomButton(theme)}
-            icon={<ArrowRightIcon />}
-            onPress={() => console.log('pressed')}
+            icon={<Image source={require('../../assets/icons/arrow-right.png')} />}
+            onPress={handleContinue}
           />
         </View>
         <Text style={styles.byGivingYourContainer}>
@@ -47,10 +58,10 @@ const EnterSpaceTitle = () => {
         </Text>
       </View>
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default EnterSpaceTitle
+export default EnterSpaceTitle;
 
 const styles = StyleSheet.create({
   container: {
@@ -61,43 +72,41 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   top: {
-    gap: 10
+    gap: 10,
   },
   mid: {
-    gap: 15
+    gap: 15,
   },
   backButton: {
-    marginBottom: 20
+    marginBottom: 20,
   },
-  title: theme => ({
+  title: (theme) => ({
     fontSize: 24,
     fontWeight: 'bold',
-    color: theme.colors.textPrimary
+    color: theme.colors.textPrimary,
   }),
-  subTitle: theme => ({
+  subTitle: (theme) => ({
     color: theme.colors.textSecondary,
     fontWeight: '400',
-    fontSize: 16
+    fontSize: 16,
   }),
-  bottomText: theme => ({
+  bottomText: (theme) => ({
     color: theme.colors.textPrimary,
     fontSize: 14,
   }),
   linkText: {
     color: 'blue',
-    textDecorationLine: 'underline'
+    textDecorationLine: 'underline',
   },
   bottom: {
     bottom: 20,
-    gap: 24
+    gap: 24,
   },
   buttonContainer: {
-    // Ensure this container does not stretch the button
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
   },
-  bottomButton: theme => ({
+  bottomButton: (theme) => ({
     borderRadius: 33,
     backgroundColor: "#c8c8c8",
     paddingHorizontal: 16,
@@ -107,10 +116,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
   }),
   byGivingYour: {
-    color: "#979797"
+    color: "#979797",
   },
   termsConditions: {
-    color: "#f65f3e"
+    color: "#f65f3e",
   },
   byGivingYourContainer: {
     fontSize: 14,
@@ -118,6 +127,6 @@ const styles = StyleSheet.create({
     fontFamily: "PlusJakartaSans-Medium",
     textAlign: "center",
     width: 291,
-    height: 37
-  }
+    height: 37,
+  },
 });

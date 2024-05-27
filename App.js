@@ -11,6 +11,7 @@ import EnterSpaceCode from './screens/profileGeneration/EnterSpaceCode';
 import { ThemeProvider } from './context/ThemeContext';
 import SelectCategory from './screens/profileGeneration/SelectCategory';
 import Register from './screens/profileGeneration';
+import { ProfileProvider } from './context/ProfileContext';
 
 const Stack = createStackNavigator();
 
@@ -54,17 +55,19 @@ function App() {
 
   return (
     <ThemeProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Onbaording"
-          screenOptions={{
-            headerShown: false  // This line hides the header globally for all screens
-          }}
-        >
-          <Stack.Screen name="Onboarding" component={Onboarding} />
-          <Stack.Screen name="Register" component={Register} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ProfileProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Onbaording"
+            screenOptions={{
+              headerShown: false  // This line hides the header globally for all screens
+            }}
+          >
+            <Stack.Screen name="Onboarding" component={Onboarding} />
+            <Stack.Screen name="Register" component={Register} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ProfileProvider>
     </ThemeProvider>
   );
 }
