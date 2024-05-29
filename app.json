@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.jpg",
+      "image": "./assets/splash.png",
       "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
@@ -32,7 +32,6 @@
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/Lato/Lato-Black.ttf",
             "./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-ExtraLight.ttf",
             "./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Light.ttf",
             "./assets/fonts/Plus_Jakarta_Sans/static/PlusJakartaSans-Regular.ttf"

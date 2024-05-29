@@ -1,13 +1,13 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeContext } from '../../context/ThemeContext';
-import CustomTextInput from '../../components/inputs/CustomTextInput';
-import PrimaryButton from '../../components/buttons/PrimaryButton';
-import { ProfileContext } from '../../context/ProfileContext';
+import { ThemeContext } from '../../../context/ThemeContext';
+import CustomTextInput from '../../../components/inputs/CustomTextInput';
+import PrimaryButton from '../../../components/buttons/PrimaryButton';
+import { ProfileContext } from '../../../context/ProfileContext';
 
 
-const EnterVerification = () => {
+const StepTwo = () => {
   const { theme } = useContext(ThemeContext);
   const { profile, setProfile } = useContext(ProfileContext);
   const navigation = useNavigation();
@@ -29,7 +29,7 @@ const EnterVerification = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Image source={require('../../assets/icons/chevron_big_left.png')} />
+          <Image source={require('../../../assets/icons/chevron_big_left.png')} />
         </TouchableOpacity>
 
         <View style={styles.mid}>
@@ -54,7 +54,7 @@ const EnterVerification = () => {
         <PrimaryButton
           text="Continue"
           style={styles.bottomButton(theme)}
-          icon={<Image source={require('../../assets/icons/arrow-right.png')} />}
+          icon={<Image source={require('../../../assets/icons/arrow-right.png')} />}
           onPress={handleContinue}
         />
         <Text style={styles.byGivingYourContainer}>
@@ -69,7 +69,7 @@ const EnterVerification = () => {
   );
 };
 
-export default EnterVerification;
+export default StepTwo;
 
 const styles = StyleSheet.create({
   container: {

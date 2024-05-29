@@ -1,12 +1,12 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeContext } from '../../context/ThemeContext';
-import CustomTextInput from '../../components/inputs/CustomTextInput';
-import PrimaryButton from '../../components/buttons/PrimaryButton';
-import { ProfileContext } from '../../context/ProfileContext';
+import { ThemeContext } from '../../../context/ThemeContext';
+import CustomTextInput from '../../../components/inputs/CustomTextInput';
+import PrimaryButton from '../../../components/buttons/PrimaryButton';
+import { ProfileContext } from '../../../context/ProfileContext';
 
-const EnterSpaceTitle = () => {
+const EnterName = () => {
   const { theme } = useContext(ThemeContext);
   const { profile, setProfile } = useContext(ProfileContext);
   const navigation = useNavigation();
@@ -60,7 +60,7 @@ const EnterSpaceTitle = () => {
   );
 };
 
-export default EnterSpaceTitle;
+export default EnterName;
 
 const styles = StyleSheet.create({
   container: {

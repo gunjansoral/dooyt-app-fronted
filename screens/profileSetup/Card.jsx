@@ -7,7 +7,7 @@ import PrimaryButton from '../../../components/buttons/PrimaryButton';
 import { ProfileContext } from '../../../context/ProfileContext';
 
 
-const EnterSpaceCode = () => {
+const Card = ({ title, subTitle, type = 1, setProfile }) => {
   const { theme } = useContext(ThemeContext);
   const { profile, setProfile } = useContext(ProfileContext);
   const navigation = useNavigation();
@@ -69,7 +69,7 @@ const EnterSpaceCode = () => {
   );
 };
 
-export default EnterSpaceCode;
+export default Card;
 
 const styles = StyleSheet.create({
   container: {

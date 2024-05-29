@@ -7,7 +7,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import Onboarding from './screens/Onboarding';
 import { ThemeProvider } from './context/ThemeContext';
-import Register from './screens/profileGeneration';
+import Login from './screens/login';
 import { ProfileProvider } from './context/ProfileContext';
 
 const Stack = createStackNavigator();
@@ -61,7 +61,7 @@ function App() {
             }}
           >
             <Stack.Screen name="Onboarding" component={Onboarding} />
-            <Stack.Screen name="Register" component={Register} />
+            <Stack.Screen name="Login" component={Login} />
           </Stack.Navigator>
         </NavigationContainer>
       </ProfileProvider>

@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native';
 import React, { useContext } from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { ThemeContext } from '../../context/ThemeContext';
-import CategoryList from '../../components/CategoryList';
+import { ThemeContext } from '../../../context/ThemeContext';
+import CategoryList from '../../../components/CategoryList';
 
-const SelectCategory = () => {
+const DescribeYourBusiness = () => {
   const { theme } = useContext(ThemeContext);
   const navigation = useNavigation();
 
@@ -40,7 +40,7 @@ const SelectCategory = () => {
   );
 };
 
-export default SelectCategory;
+export default DescribeYourBusiness;
 
 const styles = StyleSheet.create({
   container: {
