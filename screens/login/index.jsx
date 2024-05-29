@@ -13,7 +13,7 @@ const Login = () => {
       }}
     >
       <Stack.Screen name="EnterMobileNumber" component={EnterMobileNumber} />
-      <Stack.Screen name="EnterVerfication" component={EnterVerification} />
+      <Stack.Screen name="EnterVerification" component={EnterVerification} />
       {/* Additional screens can be added here */}
     </Stack.Navigator>
   );

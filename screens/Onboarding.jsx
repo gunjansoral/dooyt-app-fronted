@@ -22,7 +22,7 @@ const Onboarding = () => {
       slidesRef.current.scrollToIndex({ index: nextIndex });
       setCurrentIndex(nextIndex);
     } else {
-      navigation.navigate('Register');  // Use navigation here
+      navigation.navigate('Login');  // Use navigation here
     }
   };
 

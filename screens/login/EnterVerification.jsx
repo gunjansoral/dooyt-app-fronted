@@ -22,7 +22,6 @@ const EnterVerification = () => {
     console.log('Space code entered:', spaceCode);
     setProfile({ ...profile, spaceCode });
     // Navigate to EnterSpaceTitle screen
-    navigation.navigate('EnterSpaceTitle', { spaceCode });
   };
 
   return (

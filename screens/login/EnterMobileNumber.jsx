@@ -14,15 +14,11 @@ const EnterMobileNumber = () => {
 
   const [spaceCode, setSpaceCode] = useState('');
 
-  const handleRegisterNowPress = () => {
-    Linking.openURL('https://www.dooyt.com');
-  };
-
   const handleContinue = () => {
     console.log('Space code entered:', spaceCode);
     setProfile({ ...profile, spaceCode });
     // Navigate to EnterSpaceTitle screen
-    navigation.navigate('EnterSpaceTitle', { spaceCode });
+    navigation.navigate('EnterVerification', { spaceCode });
   };
 
   return (
@@ -33,20 +29,15 @@ const EnterMobileNumber = () => {
         </TouchableOpacity>
 
         <View style={styles.mid}>
-          <Text style={styles.title(theme)}>Enter Your Unique Space Code</Text>
+          <Text style={styles.title(theme)}>Enter Your Mobile Number</Text>
           <Text style={styles.subTitle(theme)}>
-            Enter your Unique Space Code provided in your subscription plan
+            Enter your mobile number to start using Dooyt App.
           </Text>
           <CustomTextInput
             placeholder='Your Space Code'
             value={spaceCode}
             onChangeText={setSpaceCode}
           />
-          <TouchableOpacity onPress={handleRegisterNowPress}>
-            <Text style={styles.bottomText(theme)}>Do you still not have your own unique space code?
-              <Text style={styles.linkText}> Register Now on Dooyt.com</Text>
-            </Text>
-          </TouchableOpacity>
         </View>
       </View>
 
