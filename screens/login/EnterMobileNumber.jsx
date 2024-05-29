@@ -5,6 +5,7 @@ import { ThemeContext } from '../../context/ThemeContext';
 import CustomTextInput from '../../components/inputs/CustomTextInput';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import { ProfileContext } from '../../context/ProfileContext';
+import PhoneNumberInput from '../../components/inputs/PhoneNumberInput';
 
 
 const EnterMobileNumber = () => {
@@ -12,13 +13,13 @@ const EnterMobileNumber = () => {
   const { profile, setProfile } = useContext(ProfileContext);
   const navigation = useNavigation();
 
-  const [spaceCode, setSpaceCode] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const handleContinue = () => {
-    console.log('Space code entered:', spaceCode);
-    setProfile({ ...profile, spaceCode });
+    console.log('Space code entered:', phoneNumber);
+    setProfile({ ...profile, phoneNumber });
     // Navigate to EnterSpaceTitle screen
-    navigation.navigate('EnterVerification', { spaceCode });
+    navigation.navigate('EnterVerification');
   };
 
   return (
@@ -33,11 +34,7 @@ const EnterMobileNumber = () => {
           <Text style={styles.subTitle(theme)}>
             Enter your mobile number to start using Dooyt App.
           </Text>
-          <CustomTextInput
-            placeholder='Your Space Code'
-            value={spaceCode}
-            onChangeText={setSpaceCode}
-          />
+          <PhoneNumberInput onChangeText={setPhoneNumber} />
         </View>
       </View>
 
