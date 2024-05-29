@@ -6,10 +6,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
 import Onboarding from './screens/Onboarding';
-import EnterSpaceTitle from './screens/profileGeneration/EnterSpaceTitle';
-import EnterSpaceCode from './screens/profileGeneration/EnterSpaceCode';
 import { ThemeProvider } from './context/ThemeContext';
-import SelectCategory from './screens/profileGeneration/SelectCategory';
 import Register from './screens/profileGeneration';
 import { ProfileProvider } from './context/ProfileContext';
 
