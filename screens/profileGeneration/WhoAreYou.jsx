@@ -62,7 +62,7 @@ const WhoAreYou = () => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => navigation.navigate("EnterSpaceCode")}
+          onPress={() => navigation.navigate("EnterYourName")}
           style={styles.card(theme)}
         >
           <Image source={expertImg} style={styles.cardImage} />

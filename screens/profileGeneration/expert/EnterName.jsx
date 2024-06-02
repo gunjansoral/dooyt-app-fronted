@@ -1,55 +1,81 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React, { useContext, useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
-import { ThemeContext } from '../../../context/ThemeContext';
-import CustomTextInput from '../../../components/inputs/CustomTextInput';
-import PrimaryButton from '../../../components/buttons/PrimaryButton';
-import { ProfileContext } from '../../../context/ProfileContext';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Linking,
+} from "react-native";
+import React, { useContext, useState } from "react";
+import { useNavigation } from "@react-navigation/native";
+import { ThemeContext } from "../../../context/ThemeContext";
+import CustomTextInput from "../../../components/inputs/CustomTextInput";
+import PrimaryButton from "../../../components/buttons/PrimaryButton";
+import { ProfileContext } from "../../../context/ProfileContext";
 
 const EnterName = () => {
   const { theme } = useContext(ThemeContext);
   const { profile, setProfile } = useContext(ProfileContext);
   const navigation = useNavigation();
 
-  const [spaceTitle, setSpaceTitle] = useState('');
+  const [expertName, setExpertName] = useState("");
+
+  const handleRegisterNowPress = () => {
+    Linking.openURL("https://www.dooyt.com");
+  };
 
   const handleContinue = () => {
-    setProfile({ ...profile, spaceTitle });
-    console.log('Space title saved:', spaceTitle);
-    navigation.navigate('SelectCategory');
+    console.log("Expert Name entered:", expertName);
+    setProfile({ ...profile, expertName });
+    // Navigate to EnterSpaceTitle screen
+    navigation.navigate("EnterSpaceCodeForExpert", { expertName });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.top}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-          <Image source={require('../../assets/icons/chevron_big_left.png')} />
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}
+        >
+          <Image
+            source={require("../../../assets/icons/chevron_big_left.png")}
+          />
         </TouchableOpacity>
 
         <View style={styles.mid}>
-          <Text style={styles.title(theme)}>Enter Your Space Title</Text>
+          <Text style={styles.title(theme)}>Enter Your Name</Text>
           <Text style={styles.subTitle(theme)}>
             Enter your information to start using the Dooyt App
           </Text>
           <CustomTextInput
-            placeholder='Your Space Title'
-            value={spaceTitle}
-            onChangeText={setSpaceTitle}
+            placeholder="Your Name"
+            value={expertName}
+            onChangeText={setExpertName}
           />
+          <TouchableOpacity onPress={handleRegisterNowPress}>
+            <Text style={styles.bottomText(theme)}>
+              Do you still not have your own unique space code?
+              <Text style={styles.linkText}> Register Now on Dooyt.com</Text>
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
 
       <View style={styles.bottom}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton
-            text="Continue"
-            style={styles.bottomButton(theme)}
-            icon={<Image source={require('../../assets/icons/arrow-right.png')} />}
-            onPress={handleContinue}
-          />
-        </View>
+        <PrimaryButton
+          text="Continue"
+          style={styles.bottomButton(theme)}
+          icon={
+            <Image source={require("../../../assets/icons/arrow-right.png")} />
+          }
+          onPress={handleContinue}
+        />
         <Text style={styles.byGivingYourContainer}>
-          <Text style={styles.byGivingYour}>{`By giving your information, you agree to our `}</Text>
+          <Text
+            style={styles.byGivingYour}
+          >{`By giving your information, you agree to our `}</Text>
           <Text style={styles.termsConditions}>{`Terms & Conditions`}</Text>
           <Text style={styles.byGivingYour}>{` and `}</Text>
           <Text style={styles.termsConditions}>Privacy Policy</Text>
@@ -67,8 +93,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 30,
     marginTop: 14,
-    width: '100%',
-    justifyContent: 'space-between',
+    width: "100%",
+    justifyContent: "space-between",
   },
   top: {
     gap: 10,
@@ -81,29 +107,26 @@ const styles = StyleSheet.create({
   },
   title: (theme) => ({
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: theme.colors.textPrimary,
   }),
   subTitle: (theme) => ({
     color: theme.colors.textSecondary,
-    fontWeight: '400',
+    fontWeight: "400",
     fontSize: 16,
   }),
   bottomText: (theme) => ({
     color: theme.colors.textPrimary,
     fontSize: 14,
+    marginTop: 10,
   }),
   linkText: {
-    color: 'blue',
-    textDecorationLine: 'underline',
+    color: "blue",
+    textDecorationLine: "underline",
   },
   bottom: {
-    bottom: 20,
     gap: 24,
-  },
-  buttonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: "center",
   },
   bottomButton: (theme) => ({
     borderRadius: 33,
@@ -125,7 +148,5 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     fontFamily: "PlusJakartaSans-Medium",
     textAlign: "center",
-    width: 291,
-    height: 37,
   },
 });
