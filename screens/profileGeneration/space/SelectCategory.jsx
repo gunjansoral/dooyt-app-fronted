@@ -9,7 +9,7 @@ const SelectCategory = () => {
   const navigation = useNavigation();
 
   const handleRegisterNowPress = () => {
-    Linking.openURL('https://www.dooyt.com');
+    Linking.openURL(process.env.BACKEND_URL);
   };
 
   return (
@@ -26,15 +26,6 @@ const SelectCategory = () => {
           </Text>
           <CategoryList />
         </View>
-      </View>
-
-      <View style={styles.bottom}>
-        <Text style={styles.registerText(theme)}>
-          <Text style={styles.linkText} onPress={handleRegisterNowPress}>
-            Register now
-          </Text>
-          {' '}to start using Dooyt App.
-        </Text>
       </View>
     </SafeAreaView>
   );

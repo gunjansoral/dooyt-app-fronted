@@ -13,9 +13,9 @@ const Stack = createStackNavigator();
 const ProfileGeneration = () => {
   return (
     <Stack.Navigator
-      initialRouteName="WhoAreYou"
+      initialRouteName="EnterSpaceCode"
       screenOptions={{
-        headerShown: false, // This line hides the header globally for all screens
+        headerShown: false, // This line hides the header globally for all screensr
       }}
     >
       <Stack.Screen name="WhoAreYou" component={WhoAreYou} />

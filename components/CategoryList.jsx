@@ -2,24 +2,30 @@ import React, { useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import SelectButton from './buttons/SelectButton'; // Ensure this path is correct
 import { SafeAreaView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const CategoryList = () => {
+  const navigation = useNavigation();
   const categories = [
-    { id: '0', title: "Food & Beverage", onPress: () => console.log("Food & Beverage tapped") },
-    { id: '1', title: "Fashion & Lifestyle", onPress: () => console.log("Fashion & Lifestyle tapped") },
-    { id: '2', title: "Spa & Salon", onPress: () => console.log("Spa & Salon tapped") },
-    { id: '3', title: "Stores & Groceries", onPress: () => console.log("Stores & Groceries tapped") },
-    { id: '4', title: "Health & Medical", onPress: () => console.log("Health & Medical tapped") },
-    { id: '5', title: "Others", onPress: () => console.log("Others tapped") },
+    { _id: '0', title: "Food & Beverage", onPress: () => console.log("Food & Beverage tapped") },
+    { _id: '1', title: "Fashion & Lifestyle", onPress: () => console.log("Fashion & Lifestyle tapped") },
+    { _id: '2', title: "Spa & Salon", onPress: () => console.log("Spa & Salon tapped") },
+    { _id: '3', title: "Stores & Groceries", onPress: () => console.log("Stores & Groceries tapped") },
+    { _id: '4', title: "Health & Medical", onPress: () => console.log("Health & Medical tapped") },
+    { _id: '5', title: "Others", onPress: () => console.log("Others tapped") },
   ];
+
+  const navigate = (id) => {
+    navigation.navigate('DescribeYourBusiness', { id })
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
         data={categories}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item._id}
         renderItem={({ item }) => (
-          <SelectButton title={item.title} onPress={item.onPress} />
+          <SelectButton title={item.title} onPress={() => navigate(item._id)} />
         )}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
         // Ensuring the list is fully stretched to available width

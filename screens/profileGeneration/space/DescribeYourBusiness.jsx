@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../../../context/ThemeContext";
 import CategoryList from "../../../components/CategoryList";
 
-const DescribeYourBusiness = () => {
+const DescribeYourBusiness = ({ id }) => {
   const { theme } = useContext(ThemeContext);
   const navigation = useNavigation();
 
