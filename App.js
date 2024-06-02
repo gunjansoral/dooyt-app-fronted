@@ -9,6 +9,7 @@ import Onboarding from './screens/Onboarding';
 import { ThemeProvider } from './context/ThemeContext';
 import Login from './screens/login';
 import { ProfileProvider } from './context/ProfileContext';
+import ProfileGeneration from './screens/profileGeneration';
 
 const Stack = createStackNavigator();
 
@@ -55,13 +56,14 @@ function App() {
       <ProfileProvider>
         <NavigationContainer>
           <Stack.Navigator
-            initialRouteName="Onbaording"
+            initialRouteName="ProfileGeneration"
             screenOptions={{
               headerShown: false  // This line hides the header globally for all screens
             }}
           >
             <Stack.Screen name="Onboarding" component={Onboarding} />
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="ProfileGeneration" component={ProfileGeneration} />
           </Stack.Navigator>
         </NavigationContainer>
       </ProfileProvider>
