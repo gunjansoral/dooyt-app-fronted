@@ -10,8 +10,6 @@ import {
 import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { ThemeContext } from "../../context/ThemeContext";
-import CustomTextInput from "../../components/inputs/CustomTextInput";
-import PrimaryButton from "../../components/buttons/PrimaryButton";
 import { ProfileContext } from "../../context/ProfileContext";
 import expertImg from "../../assets/Expert_icon.png";
 import spaceImg from "../../assets/Space_icon.png";
@@ -30,7 +28,6 @@ const WhoAreYou = () => {
   const handleContinue = () => {
     console.log("Space code entered:", spaceCode);
     setProfile({ ...profile, spaceCode });
-    // Navigate to EnterSpaceTitle screen
     navigation.navigate("EnterSpaceTitle", { spaceCode });
   };
 
@@ -41,11 +38,14 @@ const WhoAreYou = () => {
           style={styles.backButton}
           onPress={() => navigation.goBack()}
         >
-          <Image source={require("../../assets/icons/chevron_big_left.png")} />
+          <Image
+            source={require("../../assets/icons/chevron_big_left.png")}
+            style={styles.backButtonIcon}
+          />
         </TouchableOpacity>
 
         <View style={styles.mid}>
-          <Text style={styles.title(theme)}>Who Are You</Text>
+          <Text style={styles.title(theme)}>Who Are You?</Text>
           <Text style={styles.subTitle(theme)}>
             Enter your information to start using the Dooyt App
           </Text>
@@ -53,15 +53,21 @@ const WhoAreYou = () => {
       </View>
 
       <View style={styles.bottom}>
-        <TouchableOpacity onPress={() => navigation.navigate("EnterSpaceCode")}>
-          <Image source={spaceImg}></Image>
-          <Text>Space</Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EnterSpaceCode")}
+          style={styles.card(theme)}
+        >
+          <Image source={spaceImg} style={styles.cardImage} />
+          <Text style={styles.imageName(theme)}>Space</Text>
         </TouchableOpacity>
 
-        <View>
-          <Image source={expertImg}></Image>
-          <Text>Expert</Text>
-        </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EnterSpaceCode")}
+          style={styles.card(theme)}
+        >
+          <Image source={expertImg} style={styles.cardImage} />
+          <Text style={styles.imageName(theme)}>Expert</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -73,21 +79,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 30,
-    marginTop: 14,
-    width: "100%",
+    backgroundColor: "#fff",
     justifyContent: "space-between",
   },
   top: {
-    gap: 10,
+    marginBottom: 20,
   },
   mid: {
+    // alignItems: "center",
     gap: 15,
   },
   backButton: {
+    alignSelf: "flex-start",
     marginBottom: 20,
   },
+  backButtonIcon: {
+    width: 24,
+    height: 24,
+    tintColor: "#000",
+  },
   title: (theme) => ({
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: "bold",
     color: theme.colors.textPrimary,
   }),
@@ -95,39 +107,26 @@ const styles = StyleSheet.create({
     color: theme.colors.textSecondary,
     fontWeight: "400",
     fontSize: 16,
+    // textAlign: "center",
+    // marginHorizontal: 20,
   }),
-  bottomText: (theme) => ({
-    color: theme.colors.textPrimary,
-    fontSize: 14,
-    marginTop: 10,
-  }),
-  linkText: {
-    color: "blue",
-    textDecorationLine: "underline",
-  },
   bottom: {
-    gap: 24,
-    alignItems: "center",
-  },
-  bottomButton: (theme) => ({
-    borderRadius: 33,
-    backgroundColor: "#c8c8c8",
-    paddingHorizontal: 16,
-    height: 66,
+    flex: 1,
     justifyContent: "center",
-    flexDirection: "row",
+    alignItems: "center",
+    gap: 40,
+  },
+  card: (theme) => ({
     alignItems: "center",
   }),
-  byGivingYour: {
-    color: "#979797",
+  cardImage: {
+    width: 200,
+    height: 200,
+    marginBottom: 10,
   },
-  termsConditions: {
-    color: "#f65f3e",
-  },
-  byGivingYourContainer: {
-    fontSize: 14,
-    fontWeight: "500",
-    fontFamily: "PlusJakartaSans-Medium",
-    textAlign: "center",
-  },
+  imageName: (theme) => ({
+    fontSize: 24,
+    fontWeight: "700",
+    color: theme.colors.textPrimary,
+  }),
 });
