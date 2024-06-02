@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { CountryPicker } from 'react-native-country-codes-picker';
 import PhoneInput from 'react-native-phone-number-input';
 
-const PhoneNumberInput = ({ onChangeText }) => {
+const PhoneNumberInput = ({ onChangeText, onValidityChange }) => {
   const [countryCode, setCountryCode] = useState('US');
   const [country, setCountry] = useState(null);
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -11,6 +11,15 @@ const PhoneNumberInput = ({ onChangeText }) => {
   const onSelect = (country) => {
     setCountryCode(country.cca2);
     setCountry(country);
+  };
+
+  const handlePhoneNumberChange = (text) => {
+    const withoutCountryCode = text.replace(/^\+\d+/, '');
+    if (withoutCountryCode.length <= 10) {
+      setPhoneNumber(text);
+      onChangeText(text);
+    }
+    onValidityChange(withoutCountryCode.length === 10);
   };
 
   return (
@@ -29,8 +38,7 @@ const PhoneNumberInput = ({ onChangeText }) => {
         defaultValue={phoneNumber}
         defaultCode={country?.cca2}
         layout="first"
-        onChangeFormattedText={onChangeText}
-        onChangeText={setPhoneNumber}
+        onChangeFormattedText={handlePhoneNumberChange}
         containerStyle={styles.phoneInputContainer}
         textContainerStyle={styles.textContainer}
       />

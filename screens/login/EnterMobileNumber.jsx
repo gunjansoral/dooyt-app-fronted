@@ -1,12 +1,10 @@
-import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { useContext, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { ThemeContext } from '../../context/ThemeContext';
-import CustomTextInput from '../../components/inputs/CustomTextInput';
 import PrimaryButton from '../../components/buttons/PrimaryButton';
 import { ProfileContext } from '../../context/ProfileContext';
 import PhoneNumberInput from '../../components/inputs/PhoneNumberInput';
-
 
 const EnterMobileNumber = () => {
   const { theme } = useContext(ThemeContext);
@@ -14,12 +12,21 @@ const EnterMobileNumber = () => {
   const navigation = useNavigation();
 
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [isButtonEnabled, setIsButtonEnabled] = useState(false);
 
   const handleContinue = () => {
-    console.log('Space code entered:', phoneNumber);
+    console.log('Phone number entered:', phoneNumber);
     setProfile({ ...profile, phoneNumber });
-    // Navigate to EnterSpaceTitle screen
+    // Navigate to EnterVerification screen
     navigation.navigate('EnterVerification');
+  };
+
+  const handlePhoneNumberChange = (number) => {
+    setPhoneNumber(number);
+  };
+
+  const handleValidityChange = (isValid) => {
+    setIsButtonEnabled(isValid);
   };
 
   return (
@@ -34,16 +41,20 @@ const EnterMobileNumber = () => {
           <Text style={styles.subTitle(theme)}>
             Enter your mobile number to start using Dooyt App.
           </Text>
-          <PhoneNumberInput onChangeText={setPhoneNumber} />
+          <PhoneNumberInput
+            onChangeText={handlePhoneNumberChange}
+            onValidityChange={handleValidityChange}
+          />
         </View>
       </View>
 
       <View style={styles.bottom}>
         <PrimaryButton
           text="Continue"
-          style={styles.bottomButton(theme)}
+          style={[styles.bottomButton(theme), isButtonEnabled ? styles.enabledButton : styles.disabledButton]}
           icon={<Image source={require('../../assets/icons/arrow-right.png')} />}
           onPress={handleContinue}
+          disabled={!isButtonEnabled}
         />
         <Text style={styles.byGivingYourContainer}>
           <Text style={styles.byGivingYour}>{`By giving your information, you agree to our `}</Text>
@@ -101,13 +112,18 @@ const styles = StyleSheet.create({
   },
   bottomButton: (theme) => ({
     borderRadius: 33,
-    backgroundColor: "#c8c8c8",
     paddingHorizontal: 16,
     height: 66,
     justifyContent: "center",
     flexDirection: "row",
     alignItems: "center",
   }),
+  enabledButton: {
+    backgroundColor: 'orange',
+  },
+  disabledButton: {
+    backgroundColor: "#d3d3d3",
+  },
   byGivingYour: {
     color: '#979797',
   },
